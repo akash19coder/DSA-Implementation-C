@@ -11,74 +11,44 @@ struct node{
 
 
 //Global  declaration section goes Where
-void create(struct node *root,struct node *new);
+struct node* create();
 void inorder(struct node *temp);
 
 //main function goes here
 void main(){
-  char answer;
-  struct node *root,*new;
-  root=NULL;
-do{
+  struct node *root;
+  root=create();
+  inorder(root);
 
-
-new=(struct node*)malloc(sizeof(struct node));
-new->left=NULL;
-new->right=NULL;
-
-printf("Enter the data you want to store\n");
-scanf("%d",&new->data);
-if(root==NULL){
-
-  root=new;
-}
-else{
-  create(root,new);
-}
-printf("Do you want to continue?(y/n)\n");
-answer=getch();
-}while(answer=='y'||answer=='Y');
-
-printf("***------INORDER-------***\n\n\n");
-inorder(root);
  }
 
 
 //create function goes here
-void create(struct node *root,struct node *new){
-char ans;
-printf("Where to insert (L/R) of %d\n",root->data);
-ans=getch();
-if(ans=='l'||ans=='L'){
-  if(root->left==NULL){
-    root->left=new;
-  }
-  else{
-    root=root->left;
-    create(root,new);
-  }
-
- }
-else{
-  if(ans=='R'||ans=='r'){
-    if(root->right==NULL){
-      root->right=new;
-    }
-    else{
-      root=root->right;
-      create(root,new);
-        }
-       }
-  }
+struct node* create(){
+   int x;
+   struct node *newnode;
+   newnode = (struct node*) malloc(sizeof(struct node));
+   printf("Enter the data(-1 if no data)\n");
+   scanf("%d",&x);
+   if(x==-1){
+     return 0;
+   }
+   newnode->data = x;
+   printf("You are entering left node of %d\n",x);
+   newnode->left=create();
+   printf("You are entering right node of %d\n",x);
+   newnode->right=create();
+   printf("Congrats! Your tree is created\n");
+   return newnode;
  }
 
 
 
  //inorder traversal goes like this
- void inorder(struct node *temp){
-   if(temp!=NULL){
-     inorder(temp->left);
-     printf("%d ",temp->data);
-     inorder(temp->right);
+ void inorder(struct node *root){
+   if(root!=NULL){
+     inorder(root->left);
+     printf("%d ",root->data);
+     inorder(root->right);
    }
  }
