@@ -12,13 +12,17 @@ struct node{
 
 //Global  declaration section goes Where
 struct node* create();
-void inorder(struct node *temp);
+void inorder(struct node *root);
+void preorder(struct node *root);
+void postorder(struct node *root);
 
 //main function goes here
 void main(){
   struct node *root;
   root=create();
   inorder(root);
+  preorder(root);
+  postorder(root);
 
  }
 
@@ -38,17 +42,35 @@ struct node* create(){
    newnode->left=create();
    printf("You are entering right node of %d\n",x);
    newnode->right=create();
-   printf("Congrats! Your tree is created\n");
+
    return newnode;
  }
 
 
 
- //inorder traversal goes like this
+ //inorder traversal function goes like this
  void inorder(struct node *root){
    if(root!=NULL){
      inorder(root->left);
-     printf("%d ",root->data);
+     printf("%d",root->data);
      inorder(root->right);
+   }
+ }
+
+//preorder traversal function goes like this
+ void preorder(struct node *root){
+   if(root!=NULL){
+     printf("%d",root->data);
+     preorder(root->left);
+     preorder(root->right);
+   }
+ }
+
+//postorder traversal function goes like this
+ void postorder(struct node *root){
+   if(root!=NULL){
+     postorder(root->left);
+     postorder(root->right);
+     printf("%d",root->data);
    }
  }
