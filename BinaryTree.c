@@ -18,11 +18,43 @@ void postorder(struct node *root);
 
 //main function goes here
 void main(){
-  struct node *root;
-  root=create();
+struct node *root;
+int choice;
+char ans;
+do{
+printf("Enter your choice\n");
+printf("1.Creating tree\n");
+printf("2.Inorder Traversal\n");
+printf("3.Preorder Traversal\n");
+printf("4.Postorder Traversal\n");
+scanf("%d",&choice);
+switch(choice){
+  case 1:
+  root = create();
+  break;
+
+  case 2:
+  printf("*----Inorder Traversal----*\n");
   inorder(root);
+  break;
+
+  case 3:
+  printf("*----Preorder Traversal----*\n");
   preorder(root);
+  break;
+
+  case 4:
+  printf("*----Postorder Traversal----*\n");
   postorder(root);
+  break;
+
+  default:
+  printf("Please Enter the correct value\n");
+}
+printf("\nDo you want to continue(Y/N)\n");
+ans=getch();
+}while(ans=='y'||ans=='Y');
+
 
  }
 
@@ -52,15 +84,16 @@ struct node* create(){
  void inorder(struct node *root){
    if(root!=NULL){
      inorder(root->left);
-     printf("%d",root->data);
+     printf("%d ",root->data);
      inorder(root->right);
    }
  }
 
-//preorder traversal function goes like this
+// preorder traversal function goes like this
  void preorder(struct node *root){
+
    if(root!=NULL){
-     printf("%d",root->data);
+     printf("%d ",root->data);
      preorder(root->left);
      preorder(root->right);
    }
@@ -68,9 +101,10 @@ struct node* create(){
 
 //postorder traversal function goes like this
  void postorder(struct node *root){
+
    if(root!=NULL){
      postorder(root->left);
      postorder(root->right);
-     printf("%d",root->data);
+     printf("%d ",root->data);
    }
  }
